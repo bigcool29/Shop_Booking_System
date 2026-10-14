@@ -1,0 +1,39 @@
+# ==============================================================================
+# CMTC Shop - Apache Security Configuration (.htaccess)
+# ==============================================================================
+
+# 1. Disable Directory Browsing / Indexing
+Options -Indexes
+
+# 2. Prevent Access to Sensitive Files and Directories
+<FilesMatch "(^#.*#|\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|sw[op]|env|md|git|json|lock))$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Explicitly Deny database.sql
+<Files "database.sql">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# Explicitly Deny README.md
+<Files "README.md">
+    Order Allow,Deny
+    Deny from all
+</Files>
+
+# 3. Security HTTP Headers
+<IfModule mod_headers.c>
+    # Prevent Clickjacking
+    Header always set X-Frame-Options "SAMEORIGIN"
+    
+    # Prevent MIME Sniffing
+    Header always set X-Content-Type-Options "nosniff"
+    
+    # Enable XSS Filter in legacy browsers
+    Header always set X-XSS-Protection "1; mode=block"
+    
+    # Referrer Policy
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+</IfModule>

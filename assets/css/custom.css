@@ -1,0 +1,117 @@
+/* Modern Custom CSS & Print Layout for CMTC Shirt Booking */
+@import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #1e40af;
+    --primary-light: #3b82f6;
+    --primary-dark: #1e3a8a;
+    --accent-color: #f59e0b;
+}
+
+body {
+    font-family: 'Prompt', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background-color: #f8fafc;
+    color: #1e293b;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Card hover animation */
+.hover-lift {
+    transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-lift:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.12), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+/* Mobile Touch & Safe Area Optimization */
+* {
+    -webkit-tap-highlight-color: transparent;
+}
+.touch-scroll {
+    -webkit-overflow-scrolling: touch;
+}
+.pb-safe {
+    padding-bottom: max(1.25rem, env(safe-area-inset-bottom, 1.25rem));
+}
+.btn-touch {
+    min-height: 44px;
+    touch-action: manipulation;
+}
+.btn-touch:active {
+    transform: scale(0.97);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* Modal and QR Container */
+.qr-frame {
+    background: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.08);
+    display: inline-block;
+    border: 1px solid #e2e8f0;
+}
+
+/* Stepper styles */
+.stepper-item.active .stepper-circle {
+    background-color: #2563eb;
+    color: white;
+    border-color: #2563eb;
+}
+.stepper-item.completed .stepper-circle {
+    background-color: #10b981;
+    color: white;
+    border-color: #10b981;
+}
+
+/* Print Styles for Voucher / Receipt */
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 1cm;
+    }
+    
+    body {
+        background: white !important;
+        color: black !important;
+        font-size: 13px !important;
+    }
+    
+    .no-print,
+    nav,
+    footer,
+    header,
+    .btn,
+    button {
+        display: none !important;
+    }
+
+    .printable-card {
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        padding: 1.5rem !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .print-border {
+        border: 1px dashed #94a3b8 !important;
+    }
+}

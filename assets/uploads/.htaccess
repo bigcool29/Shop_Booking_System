@@ -1,0 +1,27 @@
+# ==============================================================================
+# CMTC Shop - Uploads Folder Security Configuration
+# Prevent Script Execution & Directory Indexing
+# ==============================================================================
+
+# 1. Disable Directory Browsing
+Options -Indexes
+
+# 2. Disable PHP Engine in Uploads Directory
+<IfModule mod_php7.c>
+    php_flag engine off
+</IfModule>
+<IfModule mod_php.c>
+    php_flag engine off
+</IfModule>
+
+# 3. Block execution of script extensions
+<FilesMatch "\.(php|php[0-9]|phtml|phar|pl|py|jsp|asp|sh|cgi)$">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# 4. Only allow safe static image and media types
+<FilesMatch "\.(jpg|jpeg|png|webp|gif|svg)$">
+    Order Deny,Allow
+    Allow from all
+</FilesMatch>
